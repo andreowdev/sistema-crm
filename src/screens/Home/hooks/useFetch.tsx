@@ -1,42 +1,33 @@
-import { useState, useEffect } from "react";
-import { LeaderDAO } from "@/Repository/HomeDAO";
 
-interface Votos {
-  votosTotal: number;
-  votosConquistados: number;
-  votosAConquistar: number;
-  votosPerdidos: number;
+
+
+export const MetaData = () => {
+  const storedData = JSON.parse(localStorage.getItem('leadersData') || 'null');
+
+  return storedData;
 }
 
-export function useFetchVotes() {
-    const [votos, setVotos] = useState<Votos>({
-        votosTotal: 0,
-        votosConquistados: 0,
-        votosAConquistar: 0,
-        votosPerdidos: 0,
-      });
+interface SaveToLocalStorage {
+  (key: string, data: unknown): void;
+}
 
+export const saveToLocalStorage: SaveToLocalStorage = (key, data) => {
+  localStorage.setItem(key, JSON.stringify(data));
+}
 
-  useEffect(() => {
-    const leaderDAO = new LeaderDAO();
+interface GetFromLocalStorage {
+  (key: string): unknown | null;
+}
 
-    const votosTotais = leaderDAO.getLeadersSortedByVotes();
-    
+export const getFromLocalStorage: GetFromLocalStorage = (key) => {
+  const data = localStorage.getItem(key);
+  return data ? JSON.parse(data) : null;
+}
 
-    const total = votosTotais.reduce(
-      (acc, leader) => {
-        acc.votosConquistados += leader.votosConquistados;
-        acc.votosAConquistar += leader.votosAConquistar;
-        acc.votosPerdidos += leader.votosPerdidos || 0;
-        return acc;
-      },
-      { votosTotal: 0, votosConquistados: 0, votosAConquistar: 0, votosPerdidos: 0 }
-    );
+interface CheckIfDataExists {
+  (key: string): boolean;
+}
 
-    total.votosTotal = total.votosConquistados + total.votosAConquistar;
-
-    setVotos(total);
-  }, []);
-
-  return votos;
+export const checkIfDataExists: CheckIfDataExists = (key) => {
+  return localStorage.getItem(key) !== null;
 }

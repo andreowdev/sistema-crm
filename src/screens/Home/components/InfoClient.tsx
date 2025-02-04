@@ -3,11 +3,11 @@ import { Avatar } from "@/components/ui/avatar";
 
 export default function ProfileCard() {
   const user = {
-    name: "Maurilio Correia",
+    name: "João da Silva",
     Partido: "Republicanos",
     Coligação: "Unidados Por Manaus",
     location: "Manaus, Am",
-    avatarUrl: "https://github.com/andreowdev.png" // URL da foto de perfil
+    avatarUrl: "https://github.com/andreowdev.png" 
   };
 
   return (

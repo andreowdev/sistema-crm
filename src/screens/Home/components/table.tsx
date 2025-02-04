@@ -1,6 +1,3 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { LeaderDAO } from "@/Repository/HomeDAO";
-import { LeaderDTO } from "@/screens/Home/dto/homeDTO";
 import {
   Table,
   TableBody,
@@ -10,67 +7,67 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useLideranca } from "@/Context/liderancaContext";
 
 export default function TableComp() {
-  // Usamos useMemo para garantir que a instância de LeaderDAO não seja recriada
-  const leaderDAO = useMemo(() => new LeaderDAO(), []); 
+  const { liderancas, adicionarVoto, removerVoto } = useLideranca();
+  const totalMeta = 120;
 
-  const [data, setData] = useState<LeaderDTO[]>([]);
+  const liderancasComVotos = liderancas.map((lideranca, index) => ({
+    ...lideranca,
+    id: index, // Adding an id property
+    votosAConquistar: Math.max(totalMeta - lideranca.votosConquistados, 0),
+  }));
 
-  // Atualiza a lista de líderes sempre que o componente é montado ou quando o state muda
-  useEffect(() => {
-    setData(leaderDAO.getLeadersSortedByVotes());
-  }, [leaderDAO]);
-
-  const adicionarVoto = (index: number) => {
-    leaderDAO.addVote(index);
-    setData([...leaderDAO.getLeadersSortedByVotes()]); // Atualiza a lista após o voto
-  };
-
-  const removerVoto = (index: number) => {
-    leaderDAO.removeVote(index);
-    setData([...leaderDAO.getLeadersSortedByVotes()]); // Atualiza a lista após remover o voto
-  };
+  // Ordenando por votos conquistados em ordem decrescente
+  const liderancasOrdenadas = liderancasComVotos.sort((a, b) => b.votosConquistados - a.votosConquistados);
 
   return (
     <Table>
-      <TableCaption>A list of your recent invoices.</TableCaption>
+      <TableCaption>Votos conquistados e os Votos A conquistar!</TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead className="w-[100px] bg-black text-white">Líderes</TableHead>
           <TableHead className="bg-green-500 text-white">Votos Certos</TableHead>
           <TableHead className="bg-red-500 text-white">A Conquistar</TableHead>
           <TableHead className="text-right bg-amber-500 text-white">Município</TableHead>
-          <TableHead className="text-right bg-amber-500 text-white">REMOVER</TableHead>
-          <TableHead className="text-right bg-amber-500 text-white">ADICIONAR</TableHead>
+          <TableHead className="text-right bg-red-500 text-white">REMOVER</TableHead>
+          <TableHead className="text-right bg-green-500 text-white">ADICIONAR</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {data.map((item, index) => (
-          <TableRow key={index}>
+        {liderancasOrdenadas.map((item) => (
+          <TableRow key={item.id}> {/* Usando 'id' como chave única */}
             <TableCell className="font-medium">{item.nome}</TableCell>
             <TableCell>{item.votosConquistados} votos</TableCell>
             <TableCell>{item.votosAConquistar} votos</TableCell>
-            <TableCell className="text-right">{item.municipio}</TableCell>
+            <TableCell>{item.municipio}</TableCell>
             <TableCell className="text-right">
-              <button
-                onClick={() => removerVoto(index)}
-                className="bg-red-500 text-white px-2 py-1 rounded"
-              >
+              <ActionButton onClick={() => removerVoto(item.id)} color="red">
                 Remover
-              </button>
+              </ActionButton>
             </TableCell>
             <TableCell className="text-right">
-              <button
-                onClick={() => adicionarVoto(index)}
-                className="bg-green-500 text-white px-2 py-1 rounded"
-              >
+              <ActionButton onClick={() => adicionarVoto(item.id)} color="green">
                 Adicionar
-              </button>
+              </ActionButton>
             </TableCell>
           </TableRow>
         ))}
       </TableBody>
     </Table>
+  );
+}
+
+import { MouseEventHandler } from "react";
+
+function ActionButton({ onClick, color, children }: { onClick: MouseEventHandler<HTMLButtonElement>, color: string, children: React.ReactNode }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`bg-${color}-500 text-white px-2 py-1 rounded`}
+    >
+      {children}
+    </button>
   );
 }

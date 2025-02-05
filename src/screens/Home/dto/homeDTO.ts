@@ -1,10 +1,7 @@
 
 
-export interface LeaderDTO {
-    nome: string;
-    votosConquistados: number;  
-    votosAConquistar: number;
-    municipio: string;
-    votosPerdidos: number;
+export interface ChartDTO {
+    month: string,
+    base: number,
   }
   

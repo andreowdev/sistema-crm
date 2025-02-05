@@ -1,6 +1,4 @@
 
-
-
 export const MetaData = () => {
   const storedData = JSON.parse(localStorage.getItem('leadersData') || 'null');
 

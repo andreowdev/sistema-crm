@@ -29,10 +29,11 @@ export default function Cards() {
       <Card className="w-full">
         <IoIosMan size={50} className="w-full mt-2" />
         <CardHeader>
-          <CardTitle className="text-lg">Meta Total</CardTitle>
+          <CardTitle className="text-lg">Meta Total: </CardTitle>
         </CardHeader>
         <div className="p-4">
-          <p className="text-2xl font-semibold">{totalProjeto} votos</p>
+          <p className="text-2xl font-semibold mt-7">{totalProjeto} votos</p>
+          <p className="text-sm">Total de Contatos</p>
         </div>
       </Card>
 
@@ -44,7 +45,7 @@ export default function Cards() {
         </CardHeader>
         <div className="p-4">
           <p className="text-2xl font-semibold">{votosConquistadosTotal} votos</p>
-          <p className="text-sm">{porcentagemConquistados.toFixed(2)}% da meta</p>
+          <p className="text-sm">{porcentagemConquistados.toFixed(2)}% da base</p>
         </div>
       </Card>
 
@@ -56,7 +57,7 @@ export default function Cards() {
         </CardHeader>
         <div className="p-4">
           <p className="text-2xl font-semibold">{votosAConquistarTotal} votos</p>
-          <p className="text-sm">{porcentagemAConquistar.toFixed(2)}% da meta</p>
+          <p className="text-sm ">{porcentagemAConquistar.toFixed(2)}% da base</p>
         </div>
       </Card>
 
@@ -67,8 +68,8 @@ export default function Cards() {
           <CardTitle className="text-lg">Votos Perdidos</CardTitle>
         </CardHeader>
         <div className="p-4">
-          <p className="text-2xl font-semibold">{votosRemovidos} votos</p>
-          <p className="text-sm">{porcentagemPerdidos.toFixed(2)}% da meta</p>
+          <p className="text-2xl font-semibold mt-7">{votosRemovidos} votos</p>
+          <p className="text-sm">{porcentagemPerdidos.toFixed(2)}% da base</p>
         </div>
       </Card>
     </div>

@@ -11,7 +11,10 @@ export default function ProfileCard() {
   };
 
   return (
-    <Card className="w-4/12 h-40 flex pl-3">
+    <Card className="w-3/12 h-40 flex pl-1">
+      <Avatar className="w-24 h-24 mx-auto mt-8 rounded-full">
+        <img src={user.avatarUrl} alt="" srcSet="" />
+      </Avatar>
       <CardHeader>
         <CardTitle className="mt-4 text-xl font-semibold">Candidato: {user.name}</CardTitle>
         <CardDescription className="text-sm text-gray-700">Partido: {user.Partido}</CardDescription>
@@ -20,9 +23,6 @@ export default function ProfileCard() {
         <p className="text-sm text-gray-700 mt-2">Município: {user.location}</p>
       </div>
       </CardHeader>
-      <Avatar className="w-24 h-24 mx-auto mt-8 rounded-none">
-        <img src={user.avatarUrl} alt="" srcSet="" />
-      </Avatar>
     </Card>
   );
 }

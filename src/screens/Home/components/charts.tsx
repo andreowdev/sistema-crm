@@ -6,7 +6,6 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card"
 import {
   ChartConfig,
@@ -14,20 +13,23 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
+
+
+
 const chartData = [
-  { month: "Mar", desktop: 0},
-  { month: "April", desktop: 20},
-  { month: "May", desktop: 40},
-  { month: "June", desktop: 27},
-  { month: "Jul", desktop: 45},
-  { month: "Aug", desktop: 120},
-  { month: "Sep", desktop: 0},
+  { month: "Mar", base: 0},
+  { month: "April", base: 20},
+  { month: "May", base: 40},
+  { month: "June", base: 27},
+  { month: "Jul", base: 45},
+  { month: "Aug", base: 120},
+  { month: "Sep", base: 0},
 ]
 
 const chartConfig = {
-  desktop: {
-    label: "Acessos",
-    color: "hsl(var(--chart-1))",
+  base: {
+    label: "Base",
+    color: "blue",
   },
 } satisfies ChartConfig
 
@@ -35,9 +37,8 @@ export function Charts() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Area Chart - Axes</CardTitle>
         <CardDescription>
-          Showing total visitors for the last 6 months
+          Crescimento da base com o tempo.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -66,11 +67,11 @@ export function Charts() {
             />
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
             <Area
-              dataKey="desktop"
+              dataKey="base"
               type="monotoneX"
-              fill="var(--color-desktop)"
+              fill="var(--color-base)"
               fillOpacity={0.4}
-              stroke="var(--color-desktop)"
+              stroke="var(--color-base)"
               stackId="a"
             />
           </AreaChart>

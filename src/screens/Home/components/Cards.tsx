@@ -21,10 +21,8 @@ export default function Cards() {
   const porcentagemAConquistar = (votosAConquistarTotal / totalProjeto) * 100;
   const porcentagemPerdidos = (votosRemovidos / totalProjeto) * 100;
 
-  
-
   return (
-    <div className="w-full md:w-10/12 lg:w-8/12 xl:w-6/12 flex justify-between gap-4 text-center">
+    <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-center">
       {/* Card de Meta Total */}
       <Card className="w-full">
         <IoIosMan size={50} className="w-full mt-2" />
@@ -57,7 +55,7 @@ export default function Cards() {
         </CardHeader>
         <div className="p-4">
           <p className="text-2xl font-semibold">{votosAConquistarTotal} votos</p>
-          <p className="text-sm ">{porcentagemAConquistar.toFixed(2)}% da base</p>
+          <p className="text-sm">{porcentagemAConquistar.toFixed(2)}% da base</p>
         </div>
       </Card>
 

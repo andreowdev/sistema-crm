@@ -8,7 +8,6 @@ const Mapa: React.FC = () => {
   const [zonaSelecionada, setZonaSelecionada] = useState<string | null>(null); // Para armazenar a zona
   const [dadosZona, setDadosZona] = useState<{ bairro: string; zona: string; qtdLideres: number; qtdVotos: number } | null>(null);
 
-
   const dadosDeCoordenadas: { [key: string]: { bairro: string; zona: string; qtdLideres: number; qtdVotos: number } } = {
     "-3.03,-59.99": {
       bairro: "Cidade Nova",
@@ -37,7 +36,8 @@ const Mapa: React.FC = () => {
   };
 
   useEffect(() => {
-    // Criação do mapa
+    
+
     const mapaInicial = L.map('mapa').setView([-3.1, -60], 12.3); // Define a localização inicial e o zoom
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -60,7 +60,6 @@ const Mapa: React.FC = () => {
       if (dadosDeCoordenadas[chave]) {
         const dados = dadosDeCoordenadas[chave];
 
-        // Quando o clique ocorre em uma área representando Manaus, soma os dados de todos os bairros
         if (dados.bairro === "Manaus") {
           let totalLideres = 0;
           let totalVotos = 0;

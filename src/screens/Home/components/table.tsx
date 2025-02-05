@@ -15,7 +15,7 @@ function ActionButton({ onClick, color, children }: { onClick: MouseEventHandler
   return (
     <button
       onClick={onClick}
-      className={`bg-${color}-500 text-white px-2 py-1 rounded`}
+      className={`bg-${color}-500 text-white rounded px-4 py-2`}
     >
       {children}
     </button>
@@ -47,19 +47,20 @@ export default function TableComp() {
 
   return (
     <>
-      <div className="flex mb-2 p-1 text-xl">
+      <div className="flex flex-col sm:flex-row mb-4 items-center sm:justify-between">
         <Input
-          className=" text-2xl border-black border-2"
+          className="text-2xl mb-2 sm:mb-0 sm:w-1/3"
           placeholder="ex: Saimon..."
           value={filter}
           onChange={handleFilterChange}
         />
-        <Button className="ml-2">FILTER</Button>
+        <Button className="ml-0 sm:ml-2 w-full sm:w-auto">FILTER</Button>
       </div>
-      <Table>
+      
+      <Table className="overflow-x-auto w-full">
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px] bg-black text-white">Líderes</TableHead>
+            <TableHead className="w-[120px] bg-black text-white">Líderes</TableHead>
             <TableHead className="bg-green-500 text-white">Votos Certos</TableHead>
             <TableHead className="bg-red-500 text-white">A Conquistar</TableHead>
             <TableHead className="text-right bg-amber-500 text-white">Município</TableHead>

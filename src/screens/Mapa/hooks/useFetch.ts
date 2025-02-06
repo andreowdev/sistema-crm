@@ -24,10 +24,11 @@ export const dadosDeCoordenadas: {
     qtdLideres: 820.5,
     qtdVotos: 400.45,
   },
-  "-3.13,-69.98": {
+  //Localização: -3.13468836627149, -59.982537712628236
+    "-3.13,-59.98": {
     bairro: "Manaus",
     zona: "Norte do Brasil",
-    qtdLideres: 1,
-    qtdVotos: 1,
+    qtdLideres: 0,
+    qtdVotos: 0,
   },
 };

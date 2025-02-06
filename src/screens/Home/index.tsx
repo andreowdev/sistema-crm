@@ -3,7 +3,6 @@ import TableComp from "@/screens/Home/components/table";
 import PerfilClient from "./components/InfoClient";
 import Cards from "./components/Cards";
 import { Charts } from "@/screens/Home/components/charts";
-import { ModeToggle } from "@/components/ui/toggleMode";
 
 export default function Home() {
   return (
@@ -11,7 +10,6 @@ export default function Home() {
       <header className="flex flex-col sm:flex-row sm:space-x-8 p-4  shadow-lg mb-8">
         <PerfilClient />
         <Cards />
-        <ModeToggle />
       </header>
 
       <div className="container mx-auto p-6">
@@ -24,7 +22,6 @@ export default function Home() {
           <div className="w-full sm:w-4/12 space-y-6">
             <div className=" p-4 rounded-lg shadow-md">
               <Charts />
-              
             </div>
           </div>
         </div>

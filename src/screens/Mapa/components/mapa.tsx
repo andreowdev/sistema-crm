@@ -1,55 +1,59 @@
-import React, { useEffect, useState } from 'react';
-import L from 'leaflet';
+import React, { useState } from 'react';
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
+import { LatLngExpression } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { dadosDeCoordenadas } from '../hooks/useFetch';  // Certifique-se de que os dados de coordenadas estejam sendo importados corretamente
+import { dadosDeCoordenadas } from '../hooks/useFetch'; // Certifique-se de que os dados de coordenadas estejam sendo importados corretamente
 import TableMap from './tableMap';
-import { ModeToggle } from '@/components/ui/toggleMode';
 
 const Mapa: React.FC = () => {
-  const [mapa, setMapa] = useState<L.Map | null>(null);
   const [dadosZona, setDadosZona] = useState<{ bairro: string; zona: string; qtdLideres: number; qtdVotos: number } | null>(null);
+  const [posicaoClicada, setPosicaoClicada] = useState<LatLngExpression>([-3.1, -60]);
 
-  useEffect(() => {
-    const mapaInicial = L.map('mapa').setView([-3.1, -60], 12.3);
+  const MapaEventos = () => {
+    useMapEvents({
+      click(event) {
+        const latitude = event.latlng.lat;
+        const longitude = event.latlng.lng;
 
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    }).addTo(mapaInicial);
+        console.log(`Localização clicada: Latitude: ${latitude}, Longitude: ${longitude}`);
+        const chave = `${latitude.toFixed(2)},${longitude.toFixed(2)}`;
 
-    setMapa(mapaInicial);
+        if (dadosDeCoordenadas[chave]) {
+          setDadosZona(dadosDeCoordenadas[chave]);
+        } else {
+          setDadosZona(null);
+        }
 
-    mapaInicial.on('click', (event) => {
-      const latitude = event.latlng.lat;
-      const longitude = event.latlng.lng;
-	
-      console.log(`Localização clicada: Latitude: ${latitude}, Longitude: ${longitude}`);
-      const chave = `${latitude.toFixed(2)},${longitude.toFixed(2)}`;
-
-      if (dadosDeCoordenadas[chave]) {
-        setDadosZona(dadosDeCoordenadas[chave]);
-      } else {
-        setDadosZona(null); 
-      }
+        setPosicaoClicada([latitude, longitude]);
+      },
     });
 
-    return () => {
-      mapaInicial.remove();
-    };
-  }, []);
+    return null;
+  };
 
   return (
-    <div className='flex justify-center items-center min-h-[96.9vh] dark:text-white'>
-      <div className='flex space-x-2'>
-        <div id="mapa" style={{height: '600px', width: '90rem'}} className='h-[600px] w-[70%]'></div>
+    <div className="flex justify-center min-h-[96.9vh] dark:text-white">
+      <div className="flex space-x-2">
+        <div id="mapa" style={{ height: '600px', width: '90rem' }} className="h-[600px] w-[70%]">
+          <MapContainer center={[-3.1, -60]} zoom={12.3} style={{ height: '100%', width: '100%' }}>
+            <TileLayer url="https://tile.openstreetmap.org/{z}/{x}/{y}.png" attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>' />
+            <MapaEventos />
+            {posicaoClicada && (
+              <Marker position={posicaoClicada}>
+                <Popup>
+                  <p>Localização: {(posicaoClicada as [number, number])[0]}, {(posicaoClicada as [number, number])[1]}</p>
+                </Popup>
+              </Marker>
+            )}
+          </MapContainer>
+        </div>
         <div
           id="tabela-dados"
-          className='w-[35%] h-[600px] shadow-lg shadow-black dark:bg-[#292929] border border-gray-300 p-4 text-center overflow-y-auto'
+          className="w-[35%] h-[600px] shadow-lg shadow-black dark:bg-[#292929] border border-gray-300 p-4 text-center overflow-y-auto"
         >
-      <ModeToggle />
-          <h3 className='text-lg font-semibold'>Selecione uma zona no mapa</h3>
+          <h3 className="text-lg font-semibold">Selecione uma zona no mapa</h3>
           {dadosZona ? (
-            <TableMap dados={dadosZona} /> 
+            <TableMap dados={dadosZona} />
           ) : (
             <p>Clique em uma área do mapa para selecionar uma zona.</p>
           )}

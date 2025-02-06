@@ -1,4 +1,3 @@
-import React from "react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { IoIosMan } from "react-icons/io";
 import { FaVoteYea } from "react-icons/fa";
@@ -6,7 +5,7 @@ import { CgCloseR } from "react-icons/cg";
 import { GoAlertFill } from "react-icons/go";
 import { useLideranca } from "@/Context/liderancaContext";
 
-export default function Cards() {
+export default function ZCards() {
   const { liderancas, votosRemovidos } = useLideranca();  // Contexto
   const totalProjeto = 960;
 
@@ -22,10 +21,10 @@ export default function Cards() {
   const porcentagemPerdidos = (votosRemovidos / totalProjeto) * 100;
 
   return (
-    <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-center">
+    <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-center b">
       {/* Card de Meta Total */}
       <Card className="w-full">
-        <IoIosMan size={50} className="w-full mt-2" />
+        <IoIosMan size={50} className="w-full mt-2" color="#4528e6da" />
         <CardHeader>
           <CardTitle className="text-lg">Meta Total: </CardTitle>
         </CardHeader>
@@ -36,7 +35,7 @@ export default function Cards() {
       </Card>
 
       {/* Card de Votos Conquistados */}
-      <Card className="w-full">
+      <Card className="w-full ">
         <FaVoteYea size={50} className="w-full mt-2" color="green" />
         <CardHeader>
           <CardTitle className="text-lg">Votos Conquistados</CardTitle>

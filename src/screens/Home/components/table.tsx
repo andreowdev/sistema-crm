@@ -10,12 +10,14 @@ import {
 } from "@/components/ui/table";
 import { useLideranca } from "@/Context/liderancaContext";
 import { MouseEventHandler, useState } from "react";
+import { FaSearch, FaFilter } from "react-icons/fa";
+
 
 function ActionButton({ onClick, color, children }: { onClick: MouseEventHandler<HTMLButtonElement>, color: string, children: React.ReactNode }) {
   return (
     <button
       onClick={onClick}
-      className={`bg-${color}-500 text-white rounded px-4 py-2`}
+      className={`bg-[${color}] rounded px-4 py-2`}
     >
       {children}
     </button>
@@ -47,38 +49,42 @@ export default function TableComp() {
 
   return (
     <>
-      <div className="flex flex-col sm:flex-row mb-4 items-center sm:justify-between">
+      <div className="flex flex-col sm:flex-row mb-4 items-center">
+        <FaSearch size={25} className="mr-3 mb-3 sm:mb-0" />
         <Input
-          className="text-2xl mb-2 sm:mb-0 sm:w-1/3"
+          className="text-2xl mb-2 sm:mb-0 sm:w-full"
           placeholder="ex: Saimon..."
           value={filter}
           onChange={handleFilterChange}
         />
-        <Button className="ml-0 sm:ml-2 w-full sm:w-auto">FILTER</Button>
+        <Button className="ml-0 sm:ml-2 w-full sm:w-auto">
+          <FaFilter size={20}/>
+          FILTER
+          </Button>
       </div>
       
       <Table className="overflow-x-auto w-full">
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[120px] bg-black text-white">Líderes</TableHead>
-            <TableHead className="bg-green-500 text-white">Votos Certos</TableHead>
-            <TableHead className="bg-red-500 text-white">A Conquistar</TableHead>
-            <TableHead className="text-right bg-amber-500 text-white">Município</TableHead>
-            <TableHead className="text-right bg-red-500 text-white">REMOVER</TableHead>
-            <TableHead className="text-right bg-green-500 text-white">ADICIONAR</TableHead>
+            <TableHead className="w-[120px] ">Líderes</TableHead>
+            <TableHead className="">Votos Certos</TableHead>
+            <TableHead className="">A Conquistar</TableHead>
+            <TableHead className="text-center ">Município</TableHead>
+            <TableHead className="text-right ">REMOVER</TableHead>
+            <TableHead className="text-right ">ADICIONAR</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {filteredLiderancas.map((item, index) => (
+          {filteredLiderancas.map((item) => (
             <TableRow
               key={item.id}
-              className={index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}
+             
             >
               <TableCell className="font-medium">{item.nome}</TableCell>
-              <TableCell className={item.votosConquistados >= totalMeta ? 'bg-green-500 text-white' : 'bg-yellow-200'}>
+              <TableCell className={item.votosConquistados.toString()}>
                 {item.votosConquistados} votos
               </TableCell>
-              <TableCell className={item.votosAConquistar <= 10 ? 'bg-red-500 text-white' : 'bg-blue-200'}>
+              <TableCell className={item.votosAConquistar.toString()}>
                 {item.votosAConquistar} votos
               </TableCell>
               <TableCell>{item.municipio}</TableCell>

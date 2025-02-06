@@ -29,3 +29,14 @@ interface CheckIfDataExists {
 export const checkIfDataExists: CheckIfDataExists = (key) => {
   return localStorage.getItem(key) !== null;
 }
+
+
+export const chartData = [
+  { month: "Mar", base: 0},
+  { month: "April", base: 20},
+  { month: "May", base: 40},
+  { month: "June", base: 27},
+  { month: "Jul", base: 45},
+  { month: "Aug", base: 120},
+  { month: "Sep", base: 0},
+]

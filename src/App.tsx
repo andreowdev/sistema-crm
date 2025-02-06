@@ -1,8 +1,8 @@
-import Home from "./screens/Home"
+import Route from './routes/routes'
 
 export default function App() {
 
   return (
-      <Home />
+      <Route />
   )
 }

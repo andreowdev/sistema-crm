@@ -2,24 +2,52 @@ import React, { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import { LatLngExpression } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { dadosDeCoordenadas } from '../hooks/useFetch'; // Certifique-se de que os dados de coordenadas estejam sendo importados corretamente
+import { dadosDeCoordenadas} from '../hooks/useFetch'; // Certifique-se de que os dados de coordenadas estejam sendo importados corretamente
 import TableMap from './tableMap';
 
 const Mapa: React.FC = () => {
-  const [dadosZona, setDadosZona] = useState<{ bairro: string; zona: string; qtdLideres: number; qtdVotos: number } | null>(null);
+  const [dadosZona, setDadosZona] = useState<{nome:string; bairro: string; zona: string; qtdLideres: number; qtdVotos: number } | null>(null);
   const [posicaoClicada, setPosicaoClicada] = useState<LatLngExpression>([-3.1, -60]);
 
   const MapaEventos = () => {
     useMapEvents({
       click(event) {
+
+        let zona
+
         const latitude = event.latlng.lat;
         const longitude = event.latlng.lng;
 
-        console.log(`Localização clicada: Latitude: ${latitude}, Longitude: ${longitude}`);
-        const chave = `${latitude.toFixed(2)},${longitude.toFixed(2)}`;
+        console.log(` ${latitude},${longitude}`);
 
-        if (dadosDeCoordenadas[chave]) {
-          setDadosZona(dadosDeCoordenadas[chave]);
+        const chave = `${latitude},${longitude}`;
+
+
+        
+        dadosDeCoordenadas.forEach(estado => {
+          estado.municipios.forEach(municipio => {
+            const coordenadaMunicipio = municipio.cordenadas.find(coordenada => coordenada.slice(0,6) === chave.slice(0, 6))
+              if(coordenadaMunicipio) {
+                zona = municipio;
+                return; //saindo do loop
+              }
+            municipio.distritos.forEach(distrito => {
+              const coordenadaEncontrada = distrito.cordenadas.find(coordenada => coordenada.slice(0, 6) === chave.slice(0, 6));
+              if (coordenadaEncontrada) {
+                zona = distrito;
+                return; // Sai do loop de distritos imediatamente após encontrar a coordenada
+              }
+              
+            });
+          });
+        });
+
+        
+        
+
+
+        if (zona) {
+          setDadosZona(zona);
         } else {
           setDadosZona(null);
         }

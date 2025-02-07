@@ -1,34 +1,46 @@
-export const dadosDeCoordenadas: {
-  [key: string]: {
-    bairro: string;
-    zona: string;
-    qtdLideres: number;
-    qtdVotos: number;
-  };
-} = {
-  "-3.03,-59.99": {
-    bairro: "Monte das Oliveiras",
-    zona: "Norte",
-    qtdLideres: 1419.38,
-    qtdVotos: 143.201,
+// Definindo a estrutura do objeto
+export const dadosDeCoordenadas = [
+  {
+    //Para -> qtdLideres, qtdVotos, Zona(Regiao), Cordenadas
+    //cordenadas
+    nome: 'Amazonas',
+    zona: 'Norte',
+    municipios: [
+      {
+        nome: 'Manaus',
+        qtdLideres: 0,
+        qtdVotos: 0,
+        cordenadas: ['-3.1331457243820555,-59.98222566400725', '-3.1333171291487334,-59.97930843804674', '-3.1331457243820555,-59.985314491494876', '-3.135373984158954,-59.98558998041412', '-3.13468836627149,-59.98009873154722'],
+        distritos: [
+          {
+            cordenadas: ['-3.0218981802157385,-59.94749432170036', '-3.020526797950926,-59.9452866488453', ' -3.0225838706983703,-59.95161287805027', ' -3.019498260115637,-59.94322699666139', '-3.019498260115637,-59.94906267784911', ' -3.022241025511213,-59.957644561948726', '-3.024640939546073,-59.953525257580914'],
+            bairro: 'Cidade de Deus',
+            zona: 'Norte',
+            qtdLideres: 1,
+            qtdVotos: 1
+          },
+          {
+            cordenadas: [' -3.032526333954657,-59.99163465194357', '-3.0328691758867206,-59.99898962259344', '-3.033554859424751,-59.991977927307545', '-3.0345833839163916,-59.997813608495285', '-3.0356119074292356,-59.99452798288908'],
+            bairro: 'Cidade Nova',
+            zona: 'Norte',
+            qtdLideres: 1,
+            qtdVotos: 1
+          },
+          {// -3.028755065531732, -59.99180091191316
+            cordenadas: ['-3.0297835945866796,-59.916949968076686', 
+              '-3.031154965139723,-59.919884271910476', 
+              '-3.0301264373878487,-59.9195409965465',
+            '-3.0277265354998577,-59.91164566317485'],
+            bairro: 'Jorge Teixeira',
+            zona: 'Leste',
+            qtdLideres: 1,
+            qtdVotos: 1
+          },
+        ]
+      },
+
+    ]
   },
-  "-3.02,-59.95": {
-    bairro: "Cidade de Deus",
-    zona: "Norte",
-    qtdLideres: 676.76,
-    qtdVotos: 143.201,
-  },
-  "-3.05,-60.00": {
-    bairro: "Flores",
-    zona: "Norte",
-    qtdLideres: 820.5,
-    qtdVotos: 400.45,
-  },
-  //Localização: -3.13468836627149, -59.982537712628236
-    "-3.13,-59.98": {
-    bairro: "Manaus",
-    zona: "Norte do Brasil",
-    qtdLideres: 0,
-    qtdVotos: 0,
-  },
-};
+]
+;
+

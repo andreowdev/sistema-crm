@@ -1,10 +1,13 @@
 import { Table, TableBody, TableCell, TableRow, TableHead, TableHeader } from "@/components/ui/table";
+import { somarLideresEmManaus, somarVotosEmManaus } from "./Soma";
+import { dadosDeCoordenadas } from "../hooks/useFetch";
 
 interface DadosZona {
   bairro: string;
   zona: string;
   qtdLideres: number;
   qtdVotos: number;
+  nome: string;
 }
 
 interface TableMapProps {
@@ -12,10 +15,13 @@ interface TableMapProps {
 }
 
 export default function TableMap({ dados }: TableMapProps) {
+  console.log(dados)
   if (!dados) {
     return <p>Nenhum dado disponível para exibir.</p>;  // Exibindo mensagem se os dados não forem passados
   }
 
+  const somaLideres = somarLideresEmManaus(dadosDeCoordenadas)
+  const somaVotos = somarVotosEmManaus(dadosDeCoordenadas)
   return (
     <Table className="w-9/12 dark:text-white">
       <TableHeader>
@@ -28,10 +34,10 @@ export default function TableMap({ dados }: TableMapProps) {
       </TableHeader>
       <TableBody>
         <TableRow>
-          <TableCell>{dados.bairro}</TableCell>
+          <TableCell>{dados.bairro || dados.nome}</TableCell>
           <TableCell>{dados.zona}</TableCell>
-          <TableCell>{dados.qtdLideres}</TableCell>
-          <TableCell>{dados.qtdVotos}</TableCell>
+          <TableCell>{dados.qtdLideres || somaLideres}</TableCell>
+          <TableCell>{dados.qtdVotos || somaVotos}</TableCell>
         </TableRow>
       </TableBody>
     </Table>

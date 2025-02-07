@@ -6,25 +6,25 @@ export default function ProfileCard() {
     name: "João da Silva",
     Partido: "Republicanos",
     Coligação: "Unidados Por Manaus",
-    location: "Manaus, Am",
+    location: "Manaus, AM",
     avatarUrl: "https://github.com/andreowdev.png"
   };
 
   return (
-    <div className="flex justify-center items-center">
-      <Card className="w-96 h-auto flex flex-col items-center p-4 shadow-lg rounded-lg ">
-        <Avatar className="w-24 h-24 mb-4 rounded-full">
-          <img src={user.avatarUrl} alt={user.name} />
-        </Avatar>
-        <CardHeader className="text-center">
-          <CardTitle className="text-xl font-semibold">Candidato: {user.name}</CardTitle>
-          <CardDescription className="text-sm ">Partido: {user.Partido}</CardDescription>
-          <div>
-            <CardDescription className="text-sm ">Coligação: {user.Coligação}</CardDescription>
-            <CardDescription className="text-sm  mt-2">Município: {user.location}</CardDescription>
-          </div>
+    <Card className="w-full sm:w-64 h-auto flex flex-col items-center shadow-lg rounded-lg ">
+      <Avatar className="w-20 h-20  rounded-full border-4 ">
+        <img src={user.avatarUrl} alt={user.name} />
+      </Avatar>
+      <div className="flex flex-col items-center text-center space-y-1 ">
+        <CardHeader>
+          <CardTitle className="text-xl font-semibold t">Candidato: {user.name}</CardTitle>
         </CardHeader>
-      </Card>
-    </div>
+        <div className="w-full  ">
+          <CardDescription className="text-sm">Partido: <span className="font-medium">{user.Partido}</span></CardDescription>
+          <CardDescription className="text-sm">Coligação: <span className="font-medium">{user.Coligação}</span></CardDescription>
+          <CardDescription className="text-sm">Município: <span className="font-medium">{user.location}</span></CardDescription>
+        </div>
+      </div>
+    </Card>
   );
 }

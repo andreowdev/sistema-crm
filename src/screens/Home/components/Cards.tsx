@@ -21,7 +21,7 @@ export default function ZCards() {
   const porcentagemPerdidos = (votosRemovidos / totalProjeto) * 100;
 
   return (
-    <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-center b">
+    <div className="w-full sm:w-6/12 sm:h-44 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-center b">
       {/* Card de Meta Total */}
       <Card className="w-full">
         <IoIosMan size={50} className="w-full mt-2" color="#4528e6da" />

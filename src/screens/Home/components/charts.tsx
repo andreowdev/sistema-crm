@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
-import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { InputCharts } from "./inputCharts";
 import { chartData } from "../hooks/useFetch";
@@ -28,11 +28,12 @@ export function Charts() {
   };
 
   return (
-    <div>
-      <Card>
+    <div className="flex">
+      <Card className="w-full sm:w-8/12">
         <CardHeader>
+          <CardTitle>Crescimento da base com o tempo.</CardTitle>
           <CardDescription>
-            Crescimento da base com o tempo.
+            Gráfico feito com base nos dados dado pelo Municipios.
           </CardDescription>
         </CardHeader>
         <CardContent>

@@ -33,6 +33,8 @@ const Mapa: React.FC = () => {
         const longitude = event.latlng.lng;
         const chave = `${latitude},${longitude}`;
 
+        console.log({latitude},{longitude})
+
         dadosDeCoordenadas.forEach((estado) => {
           estado.municipios.forEach((municipio) => {
             const coordenadaMunicipio = municipio.cordenadas.find(
@@ -48,7 +50,7 @@ const Mapa: React.FC = () => {
               );
               if (coordenadaEncontrada) {
                 zona = distrito;
-                return; // Sai do loop de distritos imediatamente após encontrar a coordenada
+                return; 
               }
             });
           });

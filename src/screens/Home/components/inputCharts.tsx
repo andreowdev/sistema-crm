@@ -9,7 +9,7 @@ interface InputChartsProps {
 export function InputCharts({ data, handleChange }: InputChartsProps) {
   return (
     <Popover>
-      <PopoverTrigger className="rounded-sm p-2 m-2 cursor-pointer">
+      <PopoverTrigger className="rounded-sm mt-auto  ml-2 cursor-pointer">
         Modificar dados do gráfico
       </PopoverTrigger>
       <PopoverContent className="p-4">
@@ -27,7 +27,7 @@ export function InputCharts({ data, handleChange }: InputChartsProps) {
                       handleChange(item.month, value);
                     }
                   }}
-                  className="rounded-md text-center w-full mt-1"
+                  className="rounded-md text-center "
                   placeholder="Insira um número"
                 />
               </label>

@@ -4,6 +4,8 @@ import { LatLngExpression } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { dadosDeCoordenadas} from '../hooks/useFetch'; // Certifique-se de que os dados de coordenadas estejam sendo importados corretamente
 import TableMap from './tableMap';
+import icon from "./gps-svgrepo-com.svg"
+import L from 'leaflet'
 
 const Mapa: React.FC = () => {
   const [dadosZona, setDadosZona] = useState<{nome:string; bairro: string; zona: string; qtdLideres: number; qtdVotos: number } | null>(null);
@@ -18,7 +20,6 @@ const Mapa: React.FC = () => {
         const latitude = event.latlng.lat;
         const longitude = event.latlng.lng;
 
-        console.log(` ${latitude},${longitude}`);
 
         const chave = `${latitude},${longitude}`;
 
@@ -59,6 +60,12 @@ const Mapa: React.FC = () => {
     return null;
   };
 
+  const myIcon = L.icon({
+    iconUrl: icon, // Use the imported SVG URL
+    iconSize: [32, 32], // Adjust size as needed
+    // ... other icon options (iconAnchor, popupAnchor, etc.)
+});
+
   return (
     <div className="flex justify-center min-h-[96.9vh] dark:text-white">
       <div className="flex space-x-2">
@@ -67,7 +74,7 @@ const Mapa: React.FC = () => {
             <TileLayer url="https://tile.openstreetmap.org/{z}/{x}/{y}.png" attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>' />
             <MapaEventos />
             {posicaoClicada && (
-              <Marker position={posicaoClicada}>
+              <Marker position={posicaoClicada} icon={myIcon}>
                 <Popup>
                   <p>Localização: {(posicaoClicada as [number, number])[0]}, {(posicaoClicada as [number, number])[1]}</p>
                 </Popup>

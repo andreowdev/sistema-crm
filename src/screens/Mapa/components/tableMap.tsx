@@ -15,7 +15,6 @@ interface TableMapProps {
 }
 
 export default function TableMap({ dados }: TableMapProps) {
-  console.log(dados)
   if (!dados) {
     return <p>Nenhum dado disponível para exibir.</p>;  // Exibindo mensagem se os dados não forem passados
   }

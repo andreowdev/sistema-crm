@@ -7,7 +7,7 @@ export default function ProfileCard() {
     Partido: "Republicanos",
     Coligação: "Unidados Por Manaus",
     location: "Manaus, AM",
-    avatarUrl: "https://github.com/andreowdev.png"
+    avatarUrl: 'https://static.vecteezy.com/ti/vetor-gratis/p1/2248241-politico-elite-giz-branco-icone-sobre-fundo-preto-vetor.jpg'
   };
 
   return (

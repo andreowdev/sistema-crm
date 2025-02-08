@@ -3,10 +3,10 @@ import { Avatar } from "@/components/ui/avatar";
 
 export default function ProfileCard() {
   const user = {
-    name: "João da Silva",
-    Partido: "Republicanos",
-    Coligação: "Unidados Por Manaus",
-    location: "Manaus, AM",
+    name: "Nome de usuário",
+    Partido: "Nome do partido",
+    Coligação: "Nome da Coligação",
+    location: "Nome do município",
     avatarUrl: 'https://static.vecteezy.com/ti/vetor-gratis/p1/2248241-politico-elite-giz-branco-icone-sobre-fundo-preto-vetor.jpg'
   };
 

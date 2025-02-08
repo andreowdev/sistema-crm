@@ -49,7 +49,7 @@ export default function TableComp() {
 
   return (
     <>
-      <div className="flex flex-col sm:flex-row  items-center">
+      <div className="flex flex-col sm:flex-row  items-center mb-1">
         <FaSearch size={25} className="mr-3 mb-3 sm:mb-0" />
         <Input
           className="text-2xl mb-2 sm:mb-0 sm:w-full"

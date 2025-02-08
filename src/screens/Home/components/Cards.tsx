@@ -6,13 +6,13 @@ import { GoAlertFill } from "react-icons/go";
 import { useLideranca } from "@/Context/liderancaContext";
 
 export default function ZCards() {
-  const { liderancas, votosRemovidos } = useLideranca();  // Contexto
+  const { liderancas, votosRemovidos } = useLideranca();  
   const totalProjeto = 960;
 
-  // Somando os votos conquistados de todas as lideranças
+
   const votosConquistadosTotal = liderancas.reduce((total, lideranca) => total + lideranca.votosConquistados, 0);
 
-  // Calcular votos a conquistar
+
   const votosAConquistarTotal = totalProjeto - votosConquistadosTotal;
 
   // Porcentagens
